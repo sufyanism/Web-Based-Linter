@@ -2,7 +2,6 @@
 
 A lightweight web application that analyzes and validates source code using linting techniques to ensure code quality, consistency, and best practices.
 
----
 
 ## 🚀 Overview
 
@@ -14,7 +13,7 @@ Linters are essential tools in modern development as they help:
 - Improve readability and maintainability  
 - Automate code review processes  
 
----
+
 
 ## ✨ Features
 
@@ -25,7 +24,6 @@ Linters are essential tools in modern development as they help:
 - 🎯 Simple and clean user interface  
 - 🔐 No data storage (secure & stateless processing)  
 
----
 
 ## 🏗️ Tech Stack
 
@@ -41,27 +39,6 @@ Linters are essential tools in modern development as they help:
 **Linting Tools**
 - Language-specific linters (e.g., ESLint, Pylint, etc.)
 
----
-
-## 📁 Project Structure
-
-```
-web-based-linter/
-│
-├── backend/
-│   ├── main.py
-│   └── linter_engine.py
-│
-├── frontend/
-│   ├── index.html
-│   ├── style.css
-│   └── script.js
-│
-├── requirements.txt
-└── README.md
-```
-
----
 
 ## ⚙️ Installation
 
@@ -104,68 +81,25 @@ http://127.0.0.1:8000
 
 ---
 
-## 📸 Screenshots
+## 📸 Demo
 
-*(Add screenshots here)*
-
----
-
-## 🔧 How It Works
-
-1. User submits code via frontend  
-2. Backend receives request (FastAPI)  
-3. Code is passed to linter engine  
-4. Linter analyzes syntax & style  
-5. Results are returned and displayed  
+Uploading Linter.mp4…
 
 ---
 
-## 📌 Example Output
+## About Me 
+✨ I’m **Sufyan bin Uzayr**, an open-source developer passionate about building and sharing meaningful projects.
+You can learn more about me and my work at [sufyanism.com](https://sufyanism.com/) or connect with me on [Linkedin](https://www.linkedin.com/in/sufyanism)
 
-```
-Line 3: Missing semicolon
-Line 7: Unused variable 'x'
-Line 10: Indentation error
-```
+## Your all-in-one learning hub! 
+🚀 Explore courses and resources in coding, tech, and development at **zeba.academy** and **code.zeba.academy**. Empower yourself with practical skills through curated tutorials, real-world projects, and hands-on experience. Level up your tech game today! 💻✨
 
----
+**Zeba Academy**  is a learning platform dedicated to **coding**, **technology**, and **development**.  
+➡ Visit our main site: [zeba.academy](https://zeba.academy)   </br>
+➡ Explore hands-on courses and resources at: [code.zeba.academy](https://code.zeba.academy)   </br>
+➡ Check out our YouTube for more tutorials: [zeba.academy](https://www.youtube.com/@zeba.academy)  </br>
+➡ Follow us on Instagram: [zeba.academy](https://www.instagram.com/zeba.academy/)  </br>
 
-## 🔒 Security
+**Thank you for visiting!**
 
-- No file storage  
-- Stateless processing  
-- All operations performed in memory  
 
----
-
-## 🛠 Future Improvements
-
-- Support for more languages  
-- Auto-fix suggestions  
-- GitHub integration  
-- Real-time editor linting  
-- Downloadable reports  
-
----
-
-## 🤝 Contributing
-
-Contributions are welcome!
-
-1. Fork the repo  
-2. Create a new branch  
-3. Commit your changes  
-4. Submit a Pull Request  
-
----
-
-## 📄 License
-
-This project is licensed under the MIT License.
-
----
-
-## 👨‍💻 Author
-
-**Sufyan**  
-Frontend Developer passionate about building web tools  
