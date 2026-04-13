@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<article>
+  <front>
+    <article-meta>
+
+      <abstract>
+        <p>Abstract exists</p>
+      </abstract>
+
+      <contrib-group>
+        <contrib contrib-type="author">
+          <name>
+            <surname>Singh</surname>
+            <given-names>Raj</given-names>
+          </name>
+        </contrib>
+      </contrib-group>
+
+      <funding-group></funding-group>
+
+    </article-meta>
+  </front>
+
+  <back>
+    <ref-list>
+      <ref></ref>
+    </ref-list>
+  </back>
+</article>

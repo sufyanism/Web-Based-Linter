@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>JATS Linter</title>
+    <style>
+        body {
+            background: #111;
+            color: #fff;
+            font-family: Arial;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            text-align: center;
+            border: 2px dashed #444;
+            padding: 40px;
+            border-radius: 10px;
+        }
+        .drop-zone {
+            padding: 30px;
+            border: 2px dashed #666;
+            margin-top: 20px;
+            cursor: pointer;
+        }
+        .drop-zone.dragover {
+            border-color: #00ff99;
+        }
+        button {
+            margin-top: 15px;
+            padding: 10px 20px;
+        }
+        #results {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>JATS XML Linter</h2>
+
+        <div class="drop-zone" id="dropZone">
+            Drag & Drop XML File Here or Click to Upload
+            <input type="file" id="fileInput" accept=".xml" hidden>
+        </div>
+
+        <button onclick="uploadFile()">Run Validation</button>
+
+        <div id="results"></div>
+    </div>
+
+<script>
+const dropZone = document.getElementById("dropZone");
+const fileInput = document.getElementById("fileInput");
+
+dropZone.addEventListener("click", () => fileInput.click());
+
+dropZone.addEventListener("dragover", (e) => {
+    e.preventDefault();
+    dropZone.classList.add("dragover");
+});
+
+dropZone.addEventListener("dragleave", () => {
+    dropZone.classList.remove("dragover");
+});
+
+dropZone.addEventListener("drop", (e) => {
+    e.preventDefault();
+    dropZone.classList.remove("dragover");
+    fileInput.files = e.dataTransfer.files;
+});
+
+async function uploadFile() {
+    const file = fileInput.files[0];
+    const resultsDiv = document.getElementById("results");
+
+    if (!file) {
+        resultsDiv.innerHTML = "Please select a file.";
+        return;
+    }
+
+    const formData = new FormData();
+    formData.append("file", file);
+
+    const response = await fetch("/validate", {
+        method: "POST",
+        body: formData
+    });
+
+    const data = await response.json();
+
+    if (data.status === "success") {
+        resultsDiv.style.color = "lightgreen";
+        resultsDiv.innerHTML = data.message;
+    } else {
+        resultsDiv.style.color = "red";
+        let html = "<ul>";
+        (data.errors || [data.error]).forEach(err => {
+            html += `<li>${err}</li>`;
+        });
+        html += "</ul>";
+        resultsDiv.innerHTML = html;
+    }
+}
+</script>
+</body>
+</html>

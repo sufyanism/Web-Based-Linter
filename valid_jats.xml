@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<article>
+  <front>
+    <article-meta>
+
+      <title-group>
+        <article-title>Sample JATS XML Article</article-title>
+      </title-group>
+
+      <abstract>
+        <p>This is a sample abstract for testing the JATS linter.</p>
+      </abstract>
+
+      <contrib-group>
+        <contrib contrib-type="author">
+          <name>
+            <surname>Doe</surname>
+            <given-names>John</given-names>
+          </name>
+          <contrib-id contrib-id-type="orcid">0000-0001-2345-6789</contrib-id>
+        </contrib>
+      </contrib-group>
+
+      <funding-group>
+        <award-group>
+          <funding-source>Sample Funding Agency</funding-source>
+        </award-group>
+      </funding-group>
+
+    </article-meta>
+  </front>
+
+  <body>
+    <sec>
+      <title>Introduction</title>
+      <p>This is a sample body content.</p>
+    </sec>
+  </body>
+
+  <back>
+    <ref-list>
+      <ref id="R1">
+        <element-citation publication-type="journal">
+          <article-title>Sample Reference</article-title>
+          <source>Journal of Testing</source>
+          <year>2024</year>
+        </element-citation>
+      </ref>
+    </ref-list>
+  </back>
+
+</article>
