@@ -1,10 +1,8 @@
 # 🧹 Web-Based Linter
-
 A lightweight web application that analyzes and validates source code using linting techniques to ensure code quality, consistency, and best practices.
 
 
 ## 🚀 Overview
-
 The **Web-Based Linter** is designed to help developers quickly check their code for errors, formatting issues, and style inconsistencies directly from a browser.
 
 Linters are essential tools in modern development as they help:
@@ -14,9 +12,7 @@ Linters are essential tools in modern development as they help:
 - Automate code review processes  
 
 
-
 ## ✨ Features
-
 - 📂 Upload or paste code for analysis  
 - ⚡ Instant linting results  
 - 🛠 Supports multiple programming languages (extendable)  
@@ -60,8 +56,6 @@ venv\Scripts\activate    # Windows
 pip install -r requirements.txt
 ```
 
----
-
 ## ▶️ Usage
 
 ### Start the backend server
@@ -79,13 +73,9 @@ http://127.0.0.1:8000
 2. Click **Lint / Analyze**  
 3. View results instantly  
 
----
-
 ## 📸 Demo
-
 Uploading Linter.mp4…
 
----
 
 ## About Me 
 ✨ I’m **Sufyan bin Uzayr**, an open-source developer passionate about building and sharing meaningful projects.
