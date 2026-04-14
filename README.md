@@ -74,7 +74,7 @@ http://127.0.0.1:8000
 3. View results instantly  
 
 ## 📸 Demo
-Uploading Linter.mp4…
+<img width="1005" height="782" alt="Jats_Linter_Demo" src="https://github.com/user-attachments/assets/7867dc0b-c051-4644-86fb-9f4f75b56374" />
 
 
 ## About Me 
