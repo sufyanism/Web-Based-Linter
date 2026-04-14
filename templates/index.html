@@ -1,60 +1,135 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>JATS Linter</title>
+    <title>JATS XML Linter</title>
+
     <style>
         body {
-            background: #111;
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #0f172a, #1e293b);
             color: #fff;
-            font-family: Arial;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
         }
+
         .container {
-            text-align: center;
-            border: 2px dashed #444;
+            width: 420px;
+            background: #111827;
             padding: 40px;
-            border-radius: 10px;
+            border-radius: 16px;
+            text-align: center;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.6);
         }
+
+        h2 {
+            margin-bottom: 10px;
+        }
+
+        p {
+            font-size: 14px;
+            color: #9ca3af;
+        }
+
         .drop-zone {
+            border: 2px dashed #374151;
             padding: 30px;
-            border: 2px dashed #666;
+            border-radius: 12px;
             margin-top: 20px;
             cursor: pointer;
+            transition: all 0.3s ease;
         }
+
+        .drop-zone:hover {
+            border-color: #3b82f6;
+            background: rgba(59,130,246,0.1);
+        }
+
         .drop-zone.dragover {
-            border-color: #00ff99;
+            border-color: #22c55e;
+            background: rgba(34,197,94,0.1);
         }
+
         button {
-            margin-top: 15px;
-            padding: 10px 20px;
+            margin-top: 20px;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            background: #3b82f6;
+            color: white;
+            font-size: 15px;
+            cursor: pointer;
+            transition: 0.3s;
         }
+
+        button:hover {
+            background: #2563eb;
+        }
+
+        button:disabled {
+            background: #555;
+            cursor: not-allowed;
+        }
+
         #results {
             margin-top: 20px;
+            text-align: left;
+        }
+
+        .success {
+            color: #22c55e;
+        }
+
+        .error {
+            color: #ef4444;
+        }
+
+        ul {
+            padding-left: 20px;
+        }
+
+        .file-name {
+            margin-top: 10px;
+            font-size: 13px;
+            color: #cbd5f5;
         }
     </style>
 </head>
+
 <body>
-    <div class="container">
-        <h2>JATS XML Linter</h2>
 
-        <div class="drop-zone" id="dropZone">
-            Drag & Drop XML File Here or Click to Upload
-            <input type="file" id="fileInput" accept=".xml" hidden>
-        </div>
+<div class="container">
+    <h2>📄 JATS XML Linter</h2>
+    <p>Validate your XML instantly</p>
 
-        <button onclick="uploadFile()">Run Validation</button>
-
-        <div id="results"></div>
+    <div class="drop-zone" id="dropZone">
+        Drag & Drop XML File<br>or Click to Upload
+        <input type="file" id="fileInput" accept=".xml" hidden>
     </div>
+
+    <div class="file-name" id="fileName"></div>
+
+    <button id="validateBtn" onclick="uploadFile()">Run Validation</button>
+
+    <div id="results"></div>
+</div>
 
 <script>
 const dropZone = document.getElementById("dropZone");
 const fileInput = document.getElementById("fileInput");
+const resultsDiv = document.getElementById("results");
+const fileNameDiv = document.getElementById("fileName");
+const btn = document.getElementById("validateBtn");
 
 dropZone.addEventListener("click", () => fileInput.click());
+
+fileInput.addEventListener("change", () => {
+    if (fileInput.files[0]) {
+        fileNameDiv.innerText = "Selected: " + fileInput.files[0].name;
+    }
+});
 
 dropZone.addEventListener("dragover", (e) => {
     e.preventDefault();
@@ -69,40 +144,52 @@ dropZone.addEventListener("drop", (e) => {
     e.preventDefault();
     dropZone.classList.remove("dragover");
     fileInput.files = e.dataTransfer.files;
+
+    if (fileInput.files[0]) {
+        fileNameDiv.innerText = "Selected: " + fileInput.files[0].name;
+    }
 });
 
 async function uploadFile() {
     const file = fileInput.files[0];
-    const resultsDiv = document.getElementById("results");
 
     if (!file) {
-        resultsDiv.innerHTML = "Please select a file.";
+        resultsDiv.innerHTML = "<span class='error'>⚠️ Please select a file</span>";
         return;
     }
+
+    btn.disabled = true;
+    resultsDiv.innerHTML = "⏳ Validating...";
 
     const formData = new FormData();
     formData.append("file", file);
 
-    const response = await fetch("/validate", {
-        method: "POST",
-        body: formData
-    });
-
-    const data = await response.json();
-
-    if (data.status === "success") {
-        resultsDiv.style.color = "lightgreen";
-        resultsDiv.innerHTML = data.message;
-    } else {
-        resultsDiv.style.color = "red";
-        let html = "<ul>";
-        (data.errors || [data.error]).forEach(err => {
-            html += `<li>${err}</li>`;
+    try {
+        const response = await fetch("/validate", {
+            method: "POST",
+            body: formData
         });
-        html += "</ul>";
-        resultsDiv.innerHTML = html;
+
+        const data = await response.json();
+
+        if (data.status === "success") {
+            resultsDiv.innerHTML = `<div class="success">✅ ${data.message}</div>`;
+        } else {
+            let html = "<div class='error'>❌ Validation Errors:</div><ul>";
+            (data.errors || [data.error]).forEach(err => {
+                html += `<li>${err}</li>`;
+            });
+            html += "</ul>";
+            resultsDiv.innerHTML = html;
+        }
+
+    } catch (err) {
+        resultsDiv.innerHTML = "<span class='error'>❌ Server error</span>";
     }
+
+    btn.disabled = false;
 }
 </script>
+
 </body>
 </html>
